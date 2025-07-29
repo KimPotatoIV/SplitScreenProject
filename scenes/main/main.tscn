@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://de1haw24leefq"]
+
+[ext_resource type="PackedScene" uid="uid://cvd0hbydyc01d" path="res://scenes/player/left/player_l.tscn" id="1_iuonh"]
+[ext_resource type="PackedScene" uid="uid://dptp2l4jh6b3y" path="res://scenes/terrain/terrain.tscn" id="1_k2fmo"]
+[ext_resource type="Script" uid="uid://yid4cqjl1fap" path="res://scenes/main/main.gd" id="1_l3cfh"]
+[ext_resource type="PackedScene" uid="uid://cmxjsuhsvvqe6" path="res://scenes/player/right/player_r.tscn" id="2_k2fmo"]
+[ext_resource type="Texture2D" uid="uid://dcqbk7fsqif07" path="res://scenes/main/split.png" id="5_6q06x"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_l3cfh")
+
+[node name="SubViewportContainerL" type="SubViewportContainer" parent="."]
+custom_minimum_size = Vector2(320, 360)
+
+[node name="SubViewportL" type="SubViewport" parent="SubViewportContainerL"]
+handle_input_locally = false
+size = Vector2i(320, 360)
+render_target_update_mode = 4
+
+[node name="World" type="Node2D" parent="SubViewportContainerL/SubViewportL"]
+
+[node name="Terrain" parent="SubViewportContainerL/SubViewportL/World" instance=ExtResource("1_k2fmo")]
+
+[node name="PlayerL" parent="SubViewportContainerL/SubViewportL/World" instance=ExtResource("1_iuonh")]
+position = Vector2(24, 330)
+
+[node name="PlayerR" parent="SubViewportContainerL/SubViewportL/World" instance=ExtResource("2_k2fmo")]
+position = Vector2(636, 330)
+
+[node name="Camera2DL" type="Camera2D" parent="SubViewportContainerL/SubViewportL"]
+
+[node name="SubViewportContainerR" type="SubViewportContainer" parent="."]
+custom_minimum_size = Vector2(320, 360)
+offset_left = 320.0
+offset_right = 640.0
+offset_bottom = 360.0
+
+[node name="SubViewportR" type="SubViewport" parent="SubViewportContainerR"]
+handle_input_locally = false
+size = Vector2i(320, 360)
+render_target_update_mode = 4
+
+[node name="Camera2DR" type="Camera2D" parent="SubViewportContainerR/SubViewportR"]
+
+[node name="Split" type="Sprite2D" parent="."]
+texture = ExtResource("5_6q06x")
+centered = false

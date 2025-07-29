@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=3 uid="uid://cvd0hbydyc01d"]
+
+[ext_resource type="Script" uid="uid://dkbhoikit0g8h" path="res://scenes/player/left/player_l.gd" id="1_l8cpw"]
+[ext_resource type="Texture2D" uid="uid://bd21ifdukiw2j" path="res://scenes/player/tilemap-characters_packed.png" id="1_nec1s"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nec1s"]
+atlas = ExtResource("1_nec1s")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l8cpw"]
+atlas = ExtResource("1_nec1s")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vikjy"]
+atlas = ExtResource("1_nec1s")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2grg8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nec1s")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l8cpw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vikjy")
+}],
+"loop": true,
+"name": &"run",
+"speed": 8.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nec1s"]
+height = 22.0
+
+[node name="PlayerL" type="CharacterBody2D"]
+script = ExtResource("1_l8cpw")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_2grg8")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("CapsuleShape2D_nec1s")
